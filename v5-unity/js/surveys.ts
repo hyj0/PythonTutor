@@ -36,3 +36,8 @@ export var eureka_survey = eureka_survey_v2;
 export var eureka_prompt = eureka_prompt_v2;
 
 // taken down on 2019-10-19 because i really haven't looked at the data for a long time
+//
+// update on 2020-05-22: haha, actually there's been no data for eureka
+// survey since the update on 2018-03-15 since i changed the button class
+// to smallBtn, and only surveyBtnBig had the JS handler for click to send
+// data to eureka_survey.py
