@@ -616,9 +616,9 @@ export abstract class AbstractBaseFrontend {
     var survey_v14 = `
     <p style="font-size: 9pt; margin-top: 12px; margin-bottom: 15px; line-height: 150%;">
 
-    <a style="font-size: 10pt; font-weight: bold;" href="http://pgbovine.net/support.htm" target="_blank">Donate</a> to keep this tool free and available for everyone (no new features, though)
+    <a style="font-size: 10pt; font-weight: bold;" href="http://pgbovine.net/support.htm" target="_blank">Donate</a> to help keep this website up and running
     <br/>
-    Help improve this tool by completing a <a style="font-size: 10pt; font-weight: bold;" href="https://docs.google.com/forms/d/e/1FAIpQLSfQJP1ojlv8XzXAvHz0al-J_Hs3GQu4XeblxT8EzS8dIzuaYA/viewform?entry.956368502=${this.userUUID}" target="_blank">short user survey</a>
+    Fill out a <a style="font-weight: bold;" href="https://docs.google.com/forms/d/e/1FAIpQLSfQJP1ojlv8XzXAvHz0al-J_Hs3GQu4XeblxT8EzS8dIzuaYA/viewform?entry.956368502=${this.userUUID}" target="_blank">short user survey</a> to support our research
     </p>`;
     $('#surveyPane').html(survey_v14);
   }
@@ -630,6 +630,9 @@ export abstract class AbstractBaseFrontend {
 //
 // re-added a new donation link on 2020-05-19 ...
 //    <a style="font-size: 10pt; font-weight: bold;" href="http://pgbovine.net/support.htm" target="_blank">Donate</a> to keep this tool free and available for everyone (no new features, though)
+//
+// tweaked the wording on 2020-05-30 ...
+//    <a style="font-size: 10pt; font-weight: bold;" href="http://pgbovine.net/support.htm" target="_blank">Donate</a> to help keep this website up and running
 
 
 /* For survey questions. Versions of survey wording:
@@ -693,6 +696,9 @@ call for donations (deployed on 2017-12-27)
 
 v14: very similar to v13 (deployed on 2018-03-11)
 [see the survey_v14 variable]
+survey text:
+
+Help improve this tool by completing a <a style="font-size: 10pt; font-weight: bold;" href="https://docs.google.com/forms/d/e/1FAIpQLSfQJP1ojlv8XzXAvHz0al-J_Hs3GQu4XeblxT8EzS8dIzuaYA/viewform?entry.956368502=${this.userUUID}" target="_blank">short user survey</a>
 
 */
 
