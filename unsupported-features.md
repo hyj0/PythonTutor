@@ -1,8 +1,8 @@
 ## Python Tutor's server and live chat service may go down at any time and lose your code! There is NO on-call technical support available.
 
-This free website is maintained by one volunteer in my spare time, so I'm unable to respond to most requests. Your issue is probably listed here. If you're sure it's not here, [email me](http://pgbovine.net/email-policy.htm) or file a GitHub issue, and use the "Generate permanent link" button to include a URL of your code. **I only consider credible and reproducible bug reports that show the visualizer doing something clearly incorrect.** I have no time for feature requests.
+This free website is maintained by one volunteer in my spare time, so I'm unable to respond to most requests. Your issue is probably listed here. If you're sure it's not here, file a GitHub issue and use the "Generate permanent link" button to include a URL of your code. **I only consider credible and reproducible bug reports that show the visualizer doing something clearly incorrect.** I have no time for feature requests.
 
-- If you don't get a reply from me, assume your issue will NOT be addressed. *Please don't email me multiple times.*
+- If you don't get a reply from me, assume your issue will NOT be addressed. Please do not add duplicate issues.
 - I can't personally provide any programming help. Use the "Get live help!" button to request help from volunteers.
 - I can't provide technical support for users who want to install Python Tutor on their own computers/servers.
 - I can't provide support for Python Tutor code embedded in other websites. Contact those site owners for help.
@@ -167,4 +167,4 @@ Yes, only for Python, though. Change the embed URL from http:// to https:// and 
 
 ### I have an idea for a brand-new feature ...
 
-First check out this [wishlist doc](wishlist.md), then feel free to email me if you have ideas that haven't yet been mentioned there.
+First check out this [wishlist doc](wishlist.md), then feel free to file a GitHub issue if you have ideas that haven't yet been mentioned there.
