@@ -118,20 +118,24 @@ First read the [**unsupported features doc**](unsupported-features.md#read-this-
 - desktop notifications for both volunteers and requesters when something of note happens, like when someone enters a room or asks for help (so they can have Python Tutor open in a background tab and be doing other stuff while waiting)
   - maybe sound would work well here too if done tactfully
 - social features such as user accounts, profiles, reputation points, review ratings, incentives, gamification, etc. (unlikely since they go against the minimalist design philosophy of the service)
-- chat box is too small so requires too much scrolling around; would be great if resizable or fonts could be smaller
-- chat window auto-scrolls whenever a new message comes in, which is annoying if you're scrolled upward trying to read older messages
-- allow users entering public help sessions to view the full chat history
+- chat box is suboptimal:
+  - chat box is too small so requires too much scrolling around; would be great if resizable or fonts could be smaller (see below for idea about reimplementing chat box entirely)
+  - chat window auto-scrolls whenever a new message comes in, which is annoying if you're scrolled upward trying to read older messages
+  - allow users entering public help sessions to view the full chat history
 - have a volunteer lobby chat room where volunteers can hang out while waiting and maybe even coordinate with each other about who to help when new requests come onto the queue
   - but moderation would be harder in a lobby since nobody "owns" the session, unlike regular help request sessions
 - concurrent editing in the Ace editor is a bit slow and clunky; also you can't see multiple edit cursors
-- need some indicator that the chat session's original creator (i.e., the help requester) has left, so nobody in there is the original person (but it's OK for these sessions to still exist!)
+- need some indicator that the chat session's original creator (i.e., the help requester) has left, so nobody in there is the original person (but it's OK for these sessions to still exist since guests might strike up an impromptu conversation!)
+- have more accurate indicators of when a session is "IDLE" (i.e., greyed out in the request queue), since our heuristics now are very simplistic
 - better server-side caching of user state, such as ipstack geolocation calls since we have a limited free monthly quota
 - live chat doesn't work behind some firewalls or WiFi networks, probably due to different non-standard ports being used; would be good to fix this, but it's hard to reproduce unless I'm on such a network (e.g., "UCSD Guest" exhibits this issue)
 - manually implement my own improved chat box feature and code editor syncing using another library (which doesn't tie me to Ace anymore)
   - that way, I use TogetherJS only for the shared cursors (which some users even find annoying!)
   - this will give me more flexibility without being constrained by TogetherJS's clunky implementations
+  - we can still use TogetherJS to manage the sessions and just issue custom TogetherJS.send() events for different event types like chat, etc., which get picked up by our own custom chat widget
+  - a custom chat widget could be a large roomy right sidebar pane instead of a tiny text box
 - maybe some lightweight chat-based scaffolding or structure to prompt learners and helpers to interact in more productive ways rather than being a blank-slate freeform chat session ([example helper protocol](https://ksm-cs.blogspot.com/2019/10/gps-syndrome.html), example requester tips from Stack Overflow: [one](https://stackoverflow.com/help/minimal-reproducible-example), [two](https://stackoverflow.com/help/how-to-ask))
-- right now, in shared sessions the *same* code is executed N times whenever someone executes, since it simulates a "Visualize Execution" button click for all other people in the session, so they are burdening the server by executing N copies of the same code. moreover, some of their traces might be subtly different due to randomness or nondeterminism (e.g., different C/C++ pointer values). the "right" way to ensure that everyone is visualizing the exact same trace, as well as reducing burden on the server, is to simply have 1 person execute and then when they receive the trace back from the server, have that person send the trace to all other people in the session.
+- right now, in shared sessions the *same* code is executed N times whenever someone executes, since it simulates a "Visualize Execution" button click for all other people in the session, so they are burdening the server by executing N copies of the same code. moreover, some of their traces might be subtly different due to randomness or nondeterminism (e.g., different C/C++ pointer values). the "right" way to ensure that everyone is visualizing the exact same trace, as well as reducing burden on the server, is to simply have 1 person execute and then when they receive the trace back from the server, have that person send the trace to all other people in the session. (e.g., have them send it to TogetherJS server, maybe gzipped to save bandwidth, then have the server broadcast it to all other people)
 
 
 ## Language Backends
