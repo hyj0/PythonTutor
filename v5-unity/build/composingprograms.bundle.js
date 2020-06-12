@@ -23747,17 +23747,25 @@ var liveHelpSurvey = {
 //             [it still seems fine when someone is *volunteering* to help]
 //
 // 2019-03-26: took this down to simplify the UI more
+/*
 var liveHelpSurvey = {
-    requestHelp: [{ prompt: 'You are now on the help queue. Please wait for help to arrive.\n\nSupport our research by letting us know:\nWhy did you decide to ask for help at this time?',
-            v: 'r5a' },
-        { prompt: 'You are now on the help queue. Please wait for help to arrive.\n\nSupport our research by letting us know:\nWhy did you ask for help anonymously on this website rather than getting help from someone you know?',
-            v: 'r5b' },
-    ],
-    volunteerHelp: [{ prompt: "Thanks for volunteering! You are about to join a live chat.\n\nSupport our research by letting us know:\nWhy did you decide to volunteer at this time? What motivated you to click on this particular help link?",
-            v: 'h5a' },
-        { prompt: "Thanks for volunteering! You are about to join a live chat.\n\nSupport our research by letting us know:\nWhat is your current job or profession?",
-            v: 'h5b' },
-    ]
+  requestHelp:   [ {prompt: 'You are now on the help queue. Please wait for help to arrive.\n\nSupport our research by letting us know:\nWhy did you decide to ask for help at this time?',
+                    v: 'r5a'},
+                   {prompt: 'You are now on the help queue. Please wait for help to arrive.\n\nSupport our research by letting us know:\nWhy did you ask for help anonymously on this website rather than getting help from someone you know?',
+                    v: 'r5b'},
+                 ],
+  volunteerHelp: [ {prompt: "Thanks for volunteering! You are about to join a live chat.\n\nSupport our research by letting us know:\nWhy did you decide to volunteer at this time? What motivated you to click on this particular help link?",
+                    v: 'h5a'},
+                   {prompt: "Thanks for volunteering! You are about to join a live chat.\n\nSupport our research by letting us know:\nWhat is your current job or profession?",
+                    v: 'h5b'},
+                 ]
+};
+*/
+// deployed on 2020-06-11 ... note the NEW way of logging this survey by
+// using TogetherJS.send() in initPrivateSharedSession() ...
+var liveHelpSurvey = {
+    volunteerHelp: { prompt: "This site is 100% run by volunteers like you; thanks!\n\n[OPTIONAL SURVEY] What is your current job?\nWhat motivated you to volunteer right now?",
+        v: 'h6a' },
 };
 // randomly picks a survey item from liveHelpSurvey and mutates
 // localStorage to record that this has been randomly picked, so it won't
@@ -24195,11 +24203,16 @@ var OptFrontendSharedSessions = /** @class */ (function (_super) {
                           return true; // ALWAYS cause the link to be clicked
                         });
                         */
-                        // 2019-08-26 added this message:
-                        $(".gotoHelpLink").click(function () {
-                            var x = confirm('This site is 100% run by volunteers like you, so thanks for helping! Please be polite and patient with students, but feel free to leave at any time if you do not feel comfortable with the session.\n\nClick OK to join (you may need to enable pop-ups in browser).');
-                            return x;
+                        // 2019-08-26 added this message (took down on 2020-06-11
+                        // since it trips up Chrome's pop-up blocker if you wait on
+                        // this screen for too long before visiting the new window
+                        // with target="_blank")
+                        /*
+                        $(".gotoHelpLink").click(function() {
+                          var x = confirm('This site is 100% run by volunteers like you, so thanks for helping! Please be polite and patient with students, but feel free to leave at any time if you do not feel comfortable with the session.\n\nClick OK to join (you may need to enable pop-ups in browser).');
+                          return x;
                         });
+                        */
                     }
                     else {
                         displayEmptyQueueMsg = true;
@@ -25112,6 +25125,18 @@ var OptFrontendSharedSessions = /** @class */ (function (_super) {
             // session just cuz that's how TogetherJS works; it's hella confusing.
             $("td#headerTdLeft").hide(); // TODO: make a better name for this!
             $("#togetherjsStatus").html("<div>Thanks for helping! Your username is <b>" + exports.TogetherJS.config.get("getUserName")() + "</b>. Close this window when you're done.</div>");
+            // deployed on 2020-06-11 -- modal pop-up
+            var surveyItem = liveHelpSurvey['volunteerHelp'];
+            var miniSurveyResponse = prompt(surveyItem.prompt);
+            // only log it if it's non-null
+            // note the different way of logging this survey than prior versions:
+            if (miniSurveyResponse) {
+                exports.TogetherJS.send({ type: "survey",
+                    v: surveyItem.v,
+                    kind: 'volunteerHelp',
+                    user_uuid: this.userUUID,
+                    response: miniSurveyResponse });
+            }
         }
         else { // you started your own session
             var urlToShare = exports.TogetherJS.shareUrl();
