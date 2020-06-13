@@ -285,7 +285,7 @@ var liveHelpSurvey = {
 // deployed on 2020-06-11 ... note the NEW way of logging this survey by
 // using TogetherJS.send() in initPrivateSharedSession() ...
 var liveHelpSurvey = {
-  volunteerHelp: {prompt: "This site is 100% run by volunteers like you; thanks!\n\n[OPTIONAL SURVEY] What is your current job?\nWhat motivated you to volunteer right now?",
+  volunteerHelp: {prompt: "Thanks for volunteering! Press OK to enter session.\n\n[OPTIONAL: ignore if you've answered before]\nWhat is your current job? What motivated you to volunteer now?",
                   v: 'h6a'},
 };
 
