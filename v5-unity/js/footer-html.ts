@@ -14,11 +14,7 @@ confidential information. The developers of Python Tutor are not
 responsible for the chat messages or behaviors of any of the users on
 this website. We are also not responsible for any damages caused by
 using this website. Finally, it is your responsibility to follow
-appropriate academic integrity standards.</p>
-
-<p style="margin-top: 25px;">
-Copyright &copy; <a href="http://www.pgbovine.net/">Philip Guo</a>.  All rights reserved.
-</p>`;
+appropriate academic integrity standards.</p>;
 
 
 export var footerHtml = `
