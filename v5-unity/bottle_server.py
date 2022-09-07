@@ -10,6 +10,8 @@
 #
 # easy_install pip
 # pip install bottle
+import os
+import sys
 
 from bottle import route, get, request, run, template, static_file
 try:
@@ -43,6 +45,15 @@ def index(filepath):
 @route('/LIVE_exec_py2.py')
 @route('/LIVE_exec_py3.py')
 def get_py_exec():
+  if True:
+      path = os.path.join(os.path.split(__file__)[0], "..")
+      path = os.path.join(path, '..')
+      path = os.path.join(path, 'python_out.json')
+      f = open(path, 'r')
+      s = f.read()
+      f.close()
+      return s
+
   out_s = StringIO.StringIO()
 
   def json_finalizer(input_code, output_trace):
@@ -62,4 +73,4 @@ def get_py_exec():
 
 
 if __name__ == "__main__":
-    run(host='localhost', port=8003, reloader=True)
+    run(host='0.0.0.0', port=8003, reloader=True)
