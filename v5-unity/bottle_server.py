@@ -13,7 +13,7 @@
 import os
 import sys
 
-from bottle import route, get, request, run, template, static_file
+from bottle import route, get, request, run, template, static_file, response
 try:
     import StringIO # NB: don't use cStringIO since it doesn't support unicode!!!
 except:
@@ -71,6 +71,31 @@ def get_py_exec():
 
   return out_s.getvalue()
 
+@route('/exec_c_jsonp')
+@route('/exec_cpp_jsonp')
+def exec_c_jsonp():
+    path = os.path.join(os.path.split(__file__)[0], "..")
+    path = os.path.join(path, '..')
+    path = os.path.join(path, 'cpp_out.json')
+    f = open(path, 'r')
+    s = f.read()
+    f.close()
+
+    response.headers['Content-Type'] = 'text/javascript; charset=utf-8'
+
+    retStr = s
+    retStr = "/*414*/\ntypeof %s === 'function' && %s(" %(request.GET.dict['callback'][0], request.GET.dict['callback'][0])  + retStr + ");"
+    return retStr
+
+def exec_c_jsonp1():
+    if True:
+        path = os.path.join(os.path.split(__file__)[0], "..")
+        path = os.path.join(path, '..')
+        path = os.path.join(path, 'cpp_out.json')
+        f = open(path, 'r')
+        s = f.read()
+        f.close()
+        return s
 
 if __name__ == "__main__":
     run(host='0.0.0.0', port=8003, reloader=True)
